@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  # Twice per hour
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: agency_scraping
+            image: private.repository.corp/api-rest/agency-scraping:1.0.0
+            imagePullPolicy: IfNotPresent
+            envFrom:
+            - configMapRef:
+                name: api-info
+            - secretRef:
+                name: db-credentials
+          restartPolicy: Never

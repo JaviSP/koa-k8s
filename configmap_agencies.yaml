@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-info
+data:
+  # Just some examples of configmap data
+  limit_call_error_code: 420

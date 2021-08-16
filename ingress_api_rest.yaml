@@ -1,0 +1,39 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: user-mgmt-ingress
+  annotations:
+    # Example annotation for Nginx Ingress Controller
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: api.rocketlaunchs.com
+    http:
+      paths:
+      - path: /user
+        pathType: Prefix
+        backend:
+          service:
+            name: user-mgmt-service
+            port:
+              name: service
+  - host: api.rocketlaunchs.com
+    http:
+      paths:
+      - path: /agency
+        pathType: Prefix
+        backend:
+          service:
+            name: agen-mgmt-service
+            port:
+              name: service
+  - host: api.rocketlaunchs.com
+    http:
+      paths:
+      - path: /subscription
+        pathType: Prefix
+        backend:
+          service:
+            name: subs-mgmt-service
+            port:
+              name: service
